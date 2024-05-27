@@ -44,13 +44,6 @@
 </body>
 
 
-
-
-
-
-
-
-
 <svelte:head>
     <style>
         html, body{
