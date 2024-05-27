@@ -8,7 +8,7 @@
     // Initialize MQTT client when component is mounted
         client = mqtt.connect("ws://test.mosquitto.org:8081");
         console.log(client);
-        client.subscribe("cs145/Users/dosomething");
+        client.subscribe("cs145/WeWindows/formain");
 
         client.on('message', (topic, message) => {
         // Handle incoming message here
@@ -24,7 +24,7 @@
             alert("MQTT client not initialized.");
         return;
         }
-        client.publish("cs145/WeWindows/Window1", payload);
+        client.publish("cs145/WeWindows/forsensor", payload);
         payload = '';
         // alert(`Published: ${payload}`);
     }
