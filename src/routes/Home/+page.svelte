@@ -30,10 +30,13 @@
             </div>
 
             <div class="toggleBtn">
-                <div class="windowSwitch">
-                    <input type="checkbox">
-                    <span class="slider round"></span>
-                </div>
+                <button class="windowCtrl">Press to open/close window</button>
+                <button class="curtainCtrl">Press to open/close curtain</button>
+            </div>
+            
+            <div class="stateLabel">
+                <p class="windowState">WINDOW STATE</p>
+                <p class="curtainState">CURTAIN STATE</p>
             </div>
         </div>
     </div>
@@ -45,27 +48,6 @@
 
 <svelte:head>
     <style>
-        .windowSwitch {
-            position: relative;
-            display: inline-block;
-            width: 60px;
-            height: 34px;
-        }
-
-        .windowSwitch input {
-            opacity: 0;
-            width: 0;
-            height: 0;
-        }
-
-        .slider.round {
-            border-radius: 34px;
-        }
-
-        .slider.round:before {
-            border-radius: 50%;
-        }
-
         html {
             max-width: 100%;
             min-height: 100%;
@@ -132,6 +114,18 @@
         color: #f1f1f1;
         flex-shrink: 1%;
         font-size: 150%;
+    }
+
+    .stateLabel {
+
+        font-family: "Michroma";
+        font-size: 1.22vw;
+        color: #f1f1f1;
+        display: flex;
+    }
+
+    .windowState {
+        margin-left: 8%;
     }
 
     
