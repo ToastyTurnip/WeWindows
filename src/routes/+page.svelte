@@ -33,7 +33,7 @@
         </div>
 
         <div class="right">
-            <button class="test"><a href="/LogIn">CONTINUE</a></button>
+            <a href="/LogIn"><button class="continueBtn">CONTINUE</button></a>
             <img src={right} alt="right window" class="rightWindow">
         </div>
         
@@ -115,10 +115,39 @@
         animation-fill-mode: forwards;
     }
 
-    .test{
-        margin-top: 10%;
-        margin-left: 70%;
+    .continueBtn{
+        margin-top: 25%;
+        margin-left: 62%;
         position: absolute;
+        border: none;
+        background-color: #28586b;
+        color: #F1F1F1;
+        font-family: 'Poppins', monospace;
+        text-align: center;
+        font-size: 1.88vw;
+        /* size: 30px; */
+        width: 19.81%;
+        height: 10%;
+        border-radius: 14px;
+        cursor: pointer;
+        text-shadow: 3px 3px 5px #333333;
+        box-shadow: 5px 6px 4px 0 rgba(0, 0, 0, 0.3);
+        transition-duration: 0.4s;
+    }
+
+    .continueBtn:hover {
+        background-color: #0f4253;
+        color: #FFFFFF;
+        text-shadow: 3px 3px 5px #333333;
+        box-shadow: 5px 6px 4px 0 rgba(0, 0, 0, 0.3);
+        cursor: pointer;
+        font-family: 'Poppins', monospace;
+        text-align: center;
+        /* font-size: 36px;
+        size: 30px;
+        width: 200px;
+        height: 60px; */
+
     }
 
     @keyframes open1{

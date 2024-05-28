@@ -1,7 +1,7 @@
 <script>
-    let Title = "I-WINDOWS"
-    let userName
-    let password
+    let Title = "I-WINDOWS";
+    let userName = '';
+    let password = '';
 
 </script>
 
@@ -22,12 +22,12 @@
     
                 <div class="userCred">
                     <label class="txtLabel" for="userName">Username: </label>
-                    <input class="inpBox" type="text" id="userName" placeholder="Enter your username here" bind:value={userName}>
+                    <input class="inpBox" type="userName" id="userName" placeholder="Enter your username here" bind:value={userName} />
                 </div>
     
                 <div class="passCred">
                     <label class="txtLabel" for="userName">Password: </label>
-                    <input class="inpBox" type="password" id="password" placeholder="Enter your password here" bind:value={password}>
+                    <input class="inpBox" type="password" id="password" placeholder="Enter your password here" bind:value={password} />
                 </div>
     
                 <div class="submitCont">
@@ -185,11 +185,6 @@
         cursor: pointer;
         font-family: 'Poppins', monospace;
         text-align: center;
-        /* font-size: 36px;
-        size: 30px;
-        width: 200px;
-        height: 60px; */
-
     }
 
     .regCont {

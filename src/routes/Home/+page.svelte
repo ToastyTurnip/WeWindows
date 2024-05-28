@@ -1,6 +1,8 @@
 <script>
     let TempVal = "42.0 degrees"
     let Title = "I-WINDOWS"
+    let windowState = "OPEN"
+    let curtainState = "CLOSED"
 
 </script>
 
@@ -33,10 +35,16 @@
                 <button class="windowCtrl">Press to open/close window</button>
                 <button class="curtainCtrl">Press to open/close curtain</button>
             </div>
+
             
             <div class="stateLabel">
-                <p class="windowState">WINDOW STATE</p>
-                <p class="curtainState">CURTAIN STATE</p>
+                <p class="windowLabel">WINDOW STATE</p>
+                <p class="curtainLabel">CURTAIN STATE</p>
+            </div>
+
+            <div class="state">
+                <p class="windowVal">{windowState}</p>
+                <p class="curtainVal">{curtainState}</p>
             </div>
         </div>
     </div>
@@ -57,6 +65,46 @@
 </svelte:head>
 
 <style>
+
+    .toggle {
+        position : relative ;
+        display : inline-block;
+        width : 100px;
+        height : 52px;
+        background-color: red;
+        border-radius: 30px;
+        border: 2px solid gray;
+    }
+
+    .toggle:after {
+        content: '';
+        position: absolute;
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        background-color: gray;
+        top: 1px; 
+        left: 1px;
+        transition:  all 0.5s;
+    }
+
+    /* p {
+        font-family: Arial, Helvetica, sans-serif;
+        font-weight: bold;
+    } */
+
+    .checkbox:checked + .toggle:after {
+        left : 49px; 
+    }
+
+    .checkbox:checked + .toggle {
+        background-color: green;
+    }
+
+    .checkbox { 
+        display : none;
+    }
+
     .bodyContainer {
         margin: auto;
     }
@@ -119,15 +167,48 @@
     .stateLabel {
 
         font-family: "Michroma";
-        font-size: 1.22vw;
+        font-size: 1.2vw;
         color: #f1f1f1;
         display: flex;
     }
 
-    .windowState {
-        margin-left: 8%;
+    .windowLabel {
+        margin-left: 9%;
+        margin-bottom: 1%;
     }
 
+    .curtainLabel {
+        margin-left: 35%;
+        margin-bottom: 1%;
+    }
+
+    .state {
+        font-family: "Michroma";
+        font-size: 1.5vw;
+        display: flex;
+        margin-top: 0%;
+        /* text-align: center;
+        justify-content: center;
+        gap: 40%; */
+    }
+
+    .windowVal {
+        margin-top: 0%;
+        margin-left: 9%;
+        width: 15%;
+        background: -webkit-linear-gradient(45deg, #48d0b8, #9889f9);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+    }
+
+    .curtainVal {
+        margin-top: 0%;
+        margin-left: 41%;
+        width: 15%;
+        background: -webkit-linear-gradient(45deg, #48d0b8, #9889f9);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+    }
     
 
 </style> 
