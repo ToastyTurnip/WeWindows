@@ -1,7 +1,16 @@
-import { json } from '@sveltejs/kit';
+// import { json } from '@sveltejs/kit';
+// import mqtt from "mqtt";
+// import { onMount } from "svelte";
+// import pool from '../../../db';
+// import postgres from 'postgres'
 
-export function GET() {
-	const number = Math.floor(Math.random() * 6) + 1;
+// const sql = postgres()
 
-	return json(number);
-}
+// // export function GET() {
+// // 	const number = Math.floor(Math.random() * 6) + 1;
+
+// // 	return json(number);
+// // }
+
+
+// // Put http requests here
