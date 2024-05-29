@@ -1,8 +1,63 @@
 <script>
-    let TempVal = "42.0 degrees"
-    let Title = "I-WINDOWS"
-    let windowState = "OPEN"
-    let curtainState = "CLOSED"
+
+    import mqtt from "mqtt";
+	import { onMount } from "svelte";
+
+    let TempVal = "42.0 degrees";
+    let Title = "I-WINDOWS";
+    let windowState = "OPEN";
+    let curtainState = "OPEN";
+    let window = "CLOSE";
+    let curtain = "PULL DOWN";
+    let mode = ''
+
+    function toggleWindow() {
+        if (window === "CLOSE") {
+            window = "OPEN";
+            windowState = "CLOSED";
+        } else {
+            window = "CLOSE";
+            windowState = "OPEN";
+        }
+    }
+
+    function toggleCurtain() {
+        if (curtain === "PULL DOWN") {
+            curtain = "PULL UP"
+            curtainState = "CLOSED"
+        } else {
+            curtain = "PULL DOWN"
+            curtainState = "OPEN"
+        }
+    }
+    
+
+    let client;
+    let lastmessage = '';
+    onMount(() => {
+    // Initialize MQTT client when component is mounted
+        client = mqtt.connect("ws://test.mosquitto.org:8080");
+        console.log(client);
+        client.subscribe("cs145/WeWindows/formain");
+
+        client.on('message', (topic, message) => {
+        // Handle incoming message here
+        console.log(`Received message on topic ${topic}: ${message.toString()}`);
+        // You can update your Svelte component's state or perform any other actions here
+        lastmessage = message;
+});
+    });
+    
+    let payload = '';
+    function mqttpub() {
+        if (!client) {
+            alert("MQTT client not initialized.");
+        return;
+        }
+        client.publish("cs145/WeWindows/forsensor", payload);
+        payload = '';
+        // alert(`Published: ${payload}`);
+    }
 
 </script>
 
@@ -32,8 +87,8 @@
             </div>
 
             <div class="toggleBtn">
-                <button class="windowCtrl">Press to open/close window</button>
-                <button class="curtainCtrl">Press to open/close curtain</button>
+                <button class="windowCtrl" on:click={toggleWindow} on:keydown={toggleWindow}>{window}</button>
+                <button class="curtainCtrl" on:click={toggleCurtain} on:keydown={toggleCurtain}>{curtain}</button>
             </div>
 
             
@@ -169,6 +224,40 @@
         background: -webkit-linear-gradient(45deg, #48d0b8, #9889f9);
         -webkit-background-clip: text;
         -webkit-text-fill-color: transparent;
+    }
+
+    button {
+        margin-top: 2%;
+        margin-right: 3%;
+        border: none;
+        background-color: #28586b;
+        color: #F1F1F1;
+        font-family: 'Poppins', monospace;
+        text-align: center;
+        font-size: 1.5vw;
+        /* size: 30px; */
+        width: 20%;
+        height: 100%;
+        border-radius: 14px;
+        cursor: pointer;
+        text-shadow: 3px 3px 5px #333333;
+        box-shadow: 5px 6px 4px 0 rgba(0, 0, 0, 0.3);
+        transition-duration: 0.4s;
+    }
+
+    button:hover {
+        background-color: #0f4253;
+        color: #FFFFFF;
+        text-shadow: 3px 3px 5px #333333;
+        box-shadow: 5px 6px 4px 0 rgba(0, 0, 0, 0.3);
+        cursor: pointer;
+        font-family: 'Poppins', monospace;
+        text-align: center;
+    }
+
+    .windowCtrl {
+        margin-left: 8%;
+        margin-right: 36%;
     }
     
 
