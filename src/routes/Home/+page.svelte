@@ -3,35 +3,6 @@
     import mqtt from "mqtt";
 	import { onMount } from "svelte";
 
-    let TempVal = "42.0 degrees";
-    let Title = "I-WINDOWS";
-    let windowState = "OPEN";
-    let curtainState = "OPEN";
-    let window = "CLOSE";
-    let curtain = "PULL DOWN";
-    let mode = ''
-
-    function toggleWindow() {
-        if (window === "CLOSE") {
-            window = "OPEN";
-            windowState = "CLOSED";
-        } else {
-            window = "CLOSE";
-            windowState = "OPEN";
-        }
-    }
-
-    function toggleCurtain() {
-        if (curtain === "PULL DOWN") {
-            curtain = "PULL UP"
-            curtainState = "CLOSED"
-        } else {
-            curtain = "PULL DOWN"
-            curtainState = "OPEN"
-        }
-    }
-    
-
     let client;
     let lastmessage = '';
     onMount(() => {
@@ -48,16 +19,99 @@
 });
     });
     
+    let window = "OPEN";
+    let curtain = "UP";
+    let mode = "AUTO"
+
+
     let payload = '';
     function mqttpub() {
         if (!client) {
-            alert("MQTT client not initialized.");
+            alert("MQTT client not initialized1.");
         return;
         }
-        client.publish("cs145/WeWindows/forsensor", payload);
+        client.publish("cs145/WeWindows/forla", payload);
         payload = '';
         // alert(`Published: ${payload}`);
     }
+
+    function changeValueWin() {
+        mode = "MANUAL";
+        if (window === "OPEN") {
+            if (!client){
+                alert("MQTT client not initialized2.");
+            return;
+            }
+            client.publish("cs145/WeWindows/forla", "BACKWARDBACKWARD");
+            window = "CLOSED";
+        } else {
+            if (!client){
+                alert("MQTT client not initialized2.");
+            return;
+            }
+            client.publish("cs145/WeWindows/forla", "FORWARDFORWARD");
+            window = "OPEN";
+        }
+    }
+
+    function changeValueCurt() {
+        mode = "MANUAL";
+        if (curtain === "UP") {
+            if (!client){
+                alert("MQTT client not initialized3.");
+            return;
+            }
+            client.publish("cs145/WeWindows/forla", "CLOSES");
+            curtain = "DOWN";
+        } else {
+            if (!client){
+                alert("MQTT client not initialized3.");
+            return;
+            }
+            client.publish("cs145/WeWindows/forla", "OPENS");
+            curtain = "UP";
+        }
+    }
+
+    function changeValueMode() {
+        if (mode === "AUTO") {
+            if (!client){
+                alert("MQTT client not initialized4.");
+            return;
+            }
+            client.publish("cs145/WeWindows/forla", "MANUAL");
+            mode = "MANUAL";
+        } else {
+            if (!client){
+                alert("MQTT client not initialized4.");
+            return;
+            }
+            client.publish("cs145/WeWindows/forla", "AUTO");
+            mode = "AUTO";
+        }
+    }
+    
+    let Title = "I-WINDOWS";
+
+    // function toggleWindow() {
+    //     if (window === "CLOSE") {
+    //         window = "OPEN";
+    //         windowState = "CLOSED";
+    //     } else {
+    //         window = "CLOSE";
+    //         windowState = "OPEN";
+    //     }
+    // }
+
+    // function toggleCurtain() {
+    //     if (curtain === "PULL DOWN") {
+    //         curtain = "PULL UP"
+    //         curtainState = "CLOSED"
+    //     } else {
+    //         curtain = "PULL DOWN"
+    //         curtainState = "OPEN"
+    //     }
+    // }
 
 </script>
 
@@ -75,9 +129,9 @@
 
                 <br>
 
-                <select class="dropBox" name="mode" id="modeBox">
-                    <option class="opt" value="Manual Override">Manual Override</option>
-                    <option class="opt" value="Automatic Mode">Automatic</option>
+                <select class="dropBox" name="mode" id="modeBox" on:change={changeValueMode}>
+                    <option class="opt" value="AUTO">Automatic</option>
+                    <option class="opt" value="MANUAL">Manual Override</option>
                 </select>
             </div>
 
@@ -86,9 +140,9 @@
                 <p class="curtainHead">CURTAIN CONTROL</p>
             </div>
 
-            <div class="toggleBtn">
-                <button class="windowCtrl" on:click={toggleWindow} on:keydown={toggleWindow}>{window}</button>
-                <button class="curtainCtrl" on:click={toggleCurtain} on:keydown={toggleCurtain}>{curtain}</button>
+            <div>
+                <button class="windowCtrl" on:click={changeValueWin()}>OPEN/CLOSE</button>
+                <button class="curtainCtrl" on:click={changeValueCurt()}>UP/DOWN</button>
             </div>
 
             
@@ -98,8 +152,8 @@
             </div>
 
             <div class="state">
-                <p class="windowVal">{windowState}</p>
-                <p class="curtainVal">{curtainState}</p>
+                <p class="windowVal">{window}</p>
+                <p class="curtainVal">{curtain}</p>
             </div>
         </div>
     </div>

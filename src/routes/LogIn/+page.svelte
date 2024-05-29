@@ -31,7 +31,7 @@
                 </div>
     
                 <div class="submitCont">
-                    <a href="/Home"><button class="submitBtn" type="button">Log In</button></a>
+                    <a href="/Home"><button class="submitBtn">Log In</button></a>
                 </div>
     
                 <div class="regCont">
