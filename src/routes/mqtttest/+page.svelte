@@ -18,6 +18,11 @@
 });
     });
     
+    let window = "OPEN";
+    let curtain = "UP";
+    let mode = "AUTO"
+
+
     let payload = '';
     function mqttpub() {
         if (!client) {
