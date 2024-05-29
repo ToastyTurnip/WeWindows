@@ -90,40 +90,15 @@
         }
     }
 
-    let modeState = "AUTO";
+    // let change_count = "MANUAL";
 
-    function changeValueModeState() {
-        if (modeState === "AUTO") {
-            modeState = "MANUAL";
-        } else {
-            modeState = "AUTO";
-        }
-        // if (modeState === "AUTO") {
-        //     if (!client){
-        //         alert("MQTT client not initialized.");
-        //     return;
-        //     }
-        //     client.publish("cs145/WeWindows/forla", "MANUAL");
-        //     mode = "MANUAL";
-        // } else {
-        //     if (!client){
-        //         alert("MQTT client not initialized.");
-        //     return;
-        //     }
-        //     client.publish("cs145/WeWindows/forla", "AUTO");
-        //     mode = "AUTO";
-        // }
-    }
-
-    let change_count = "MANUAL";
-
-    function onChangeIncre() {
-        if (change_count === "AUTO") {
-            change_count = "MANUAL";
-        } else {
-            change_count = "AUTO";
-        }
-    }
+    // function onChangeIncre() {
+    //     if (change_count === "AUTO") {
+    //         change_count = "MANUAL";
+    //     } else {
+    //         change_count = "AUTO";
+    //     }
+    // }
 </script>
 
 <div class = "mqtt-container">
@@ -148,13 +123,13 @@
         <p>{mode}</p>
     </label>
     
-    <br>
+    <!-- <br>
 
     <select on:change={onChangeIncre}>
         <option class="opt" value="MANUAL">Manual Override</option>
         <option class="opt" value="AUTO">Automatic</option>
     </select>
 
-    <p>{ change_count }</p>
+    <p>{ change_count }</p> -->
 
 </div>

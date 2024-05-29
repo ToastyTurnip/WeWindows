@@ -21,7 +21,7 @@
     
     let window = "OPEN";
     let curtain = "UP";
-    let mode = "AUTO"
+    let mode = "AUTO";
 
 
     let payload = '';
@@ -39,14 +39,14 @@
         mode = "MANUAL";
         if (window === "OPEN") {
             if (!client){
-                alert("MQTT client not initialized2.");
+                alert("MQTT client not initialized.");
             return;
             }
             client.publish("cs145/WeWindows/forla", "BACKWARDBACKWARD");
             window = "CLOSED";
         } else {
             if (!client){
-                alert("MQTT client not initialized2.");
+                alert("MQTT client not initialized.");
             return;
             }
             client.publish("cs145/WeWindows/forla", "FORWARDFORWARD");
@@ -58,14 +58,14 @@
         mode = "MANUAL";
         if (curtain === "UP") {
             if (!client){
-                alert("MQTT client not initialized3.");
+                alert("MQTT client not initialized.");
             return;
             }
             client.publish("cs145/WeWindows/forla", "CLOSES");
             curtain = "DOWN";
         } else {
             if (!client){
-                alert("MQTT client not initialized3.");
+                alert("MQTT client not initialized.");
             return;
             }
             client.publish("cs145/WeWindows/forla", "OPENS");
@@ -76,21 +76,21 @@
     function changeValueMode() {
         if (mode === "AUTO") {
             if (!client){
-                alert("MQTT client not initialized4.");
+                alert("MQTT client not initialized.");
             return;
             }
             client.publish("cs145/WeWindows/forla", "MANUAL");
             mode = "MANUAL";
         } else {
             if (!client){
-                alert("MQTT client not initialized4.");
+                alert("MQTT client not initialized.");
             return;
             }
             client.publish("cs145/WeWindows/forla", "AUTO");
             mode = "AUTO";
         }
     }
-    
+
     let Title = "I-WINDOWS";
 
     // function toggleWindow() {
@@ -141,8 +141,10 @@
             </div>
 
             <div>
-                <button class="windowCtrl" on:click={changeValueWin()}>OPEN/CLOSE</button>
-                <button class="curtainCtrl" on:click={changeValueCurt()}>UP/DOWN</button>
+                <label for="windows">
+                    <button class="windowCtrl" on:click={changeValueWin}>OPEN/CLOSE</button>
+                </label>
+                <button class="curtainCtrl" on:click={changeValueCurt}>UP/DOWN</button>
             </div>
 
             
