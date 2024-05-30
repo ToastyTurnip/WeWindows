@@ -6,7 +6,7 @@
     let lastmessage = '';
     onMount(() => {
     // Initialize MQTT client when component is mounted
-        client = mqtt.connect("ws://test.mosquitto.org:8080");
+        client = mqtt.connect("ws://test.mosquitto.org:8081");
         console.log(client);
         client.subscribe("cs145/WeWindows/formain");
 
